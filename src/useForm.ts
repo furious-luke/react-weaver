@@ -100,7 +100,7 @@ export function useForm(args: IUseFormArgs = {}) {
         await onSubmit(values)
       }
       catch (e) {
-        setErrors(normalizeServerErrors(e))
+        updateErrors(normalizeServerErrors(e))
         throw e
       }
       finally {
