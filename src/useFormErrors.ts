@@ -74,6 +74,13 @@ export function useFormErrors(args: IUseFormErrorsArgs) {
 
   function updateTouched(changedTouched) {
     setTouched({...ctx.touched, ...replaceValues(changedTouched, true)})
+    const untouchedExternalErrors = {...ctx.externalErrors}
+    Object.entries(changedTouched).forEach(([key, touched]) => {
+      if (touched) {
+        delete untouchedExternalErrors[key]
+      }
+    })
+    setExternalErrors(untouchedExternalErrors)
   }
 
   const handleBlurProxy = useProxy(
